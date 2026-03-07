@@ -13,3 +13,8 @@ Step 2
 Step 3
 1. Rendering raw JSON displays data without organizing or translating it. Rendering a shaped object requires extracting specific fields from the code and structuring it in a clear format before dispalying in the UI.
 2. The UI is responsible for outputting the code presented in the entire index.jsx file while the logic's responsibility is to determine how data is managed when using things such as the handlesearch function, API calls, etc.
+
+Step 4
+1. The index.tsx file helps render the User Interface using the return statement, manage values using useState, and handle data processing by using the handleSearch function.
+2. To reuse the same API code presented in index.tsx, you would need to move the same code that manages how the API searches for pokemon data into a different file and make sure that resuable component only focuses on rendering only.
+3. Because the app is partially complete at the momemnt, I believe separating the logic into a different function would make it possible to the test the API parsing logic.

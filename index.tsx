@@ -29,7 +29,7 @@ export default function HomeScreen() {
         }
 
         const data = await response.json();
-
+        console.log("Pokemon data", data);
         setPokemon(data);
 
     } catch (err: any) {
@@ -37,9 +37,29 @@ export default function HomeScreen() {
     } finally {
       setLoading(false);
     }
+  }
 
-    { pokemon && (
-      <View style = {{ alignItems: "center, marginTop: 20" }} >
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Pokemon Search</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Enter Pokemon name (e.g., pikachu)"
+        value={pokemonName}
+        onChangeText={setPokemonName}
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+
+      <Button title="Get Pokemon" onPress={handleSearch} />
+
+      {loading && <Text>Loading...Please Wait</Text>}
+
+      {error !== "" && ( <Text style = {{ color: "red" }}>{error}</Text> )}
+
+      { pokemon && (
+      <View style = {{ alignItems: "center", marginTop: 20 }} >
 
         <Text style = {{ fontSize: 20, fontWeight: "bold" }} >
           {[pokemon.name]}
@@ -66,26 +86,6 @@ export default function HomeScreen() {
         ))}
       </View>
     )}
-  }
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Pokemon Search</Text>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Enter Pokemon name (e.g., pikachu)"
-        value={pokemonName}
-        onChangeText={setPokemonName}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-
-      <Button title="Get Pokemon" onPress={handleSearch} />
-
-      {loading && <Text>Loading...Please Wait</Text>}
-
-      {error !== "" && ( <Text style = {{ color: "red" }}>{error}</Text> )}
     </View>
   );
 }
@@ -111,5 +111,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
 
 

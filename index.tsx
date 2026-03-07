@@ -15,7 +15,7 @@ export default function HomeScreen() {
     console.log("Search pressed:", q);
 
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/{name}`);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${q}`);
 
         if (!response.ok) {
             console.log("Pokemon not found");
@@ -70,3 +70,4 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+

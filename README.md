@@ -9,3 +9,7 @@ Part 1
 Step 2
 1. App truth currently lives in the index.tsx file which houses all code used so far.
 2. When loading is not set to false, the app UI will be stuck in a loop thinkin the request is still in progress.
+
+Step 3
+1. Rendering raw JSON displays data without organizing or translating it. Rendering a shaped object requires extracting specific fields from the code and structuring it in a clear format before dispalying in the UI.
+2. The UI is responsible for outputting the code presented in the entire index.jsx file while the logic's responsibility is to determine how data is managed when using things such as the handlesearch function, API calls, etc.

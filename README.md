@@ -47,3 +47,9 @@ Step 10
 Step 11
 1. Persistance is implemented as a service because it separates storage logic into AsyncStorage. The controller will run as usual but delegate reading and writing data to AsyncStorage.
 2. State only retains data when the app is running. Persisted retains data when the app closes.
+
+Part 7
+
+Step 12
+1. Animation belongs in the PokemonView file because it controls how the UI behaves visually and how it interacts when used.
+2. The animation triggers when a new pokemon is searched. The line useEffect waits for the pokemon value to change to null to load the Pokemon object which initiates the animaton to start. 

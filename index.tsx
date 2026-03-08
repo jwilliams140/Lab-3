@@ -3,10 +3,16 @@ import PokemonView from "../components/PokemonView";
 import { usePokemonController } from "../controllers/usePokemonController";
 
 export default function HomeScreen() {
-
   const [pokemonName, setPokemonName] = useState("");
-
-  const { pokemon, loading, error, searchPokemon } = usePokemonController();
+  const { 
+    pokemon, 
+    loading, 
+    error, 
+    favorites,
+    isFavorite,
+    searchPokemon,
+    toggleFavorite
+    } = usePokemonController();
 
   return (
     <PokemonView
@@ -16,9 +22,14 @@ export default function HomeScreen() {
       pokemon={pokemon}
       loading={loading}
       error={error}
+      favorites={favorites}
+      isFavorite={isFavorite}
+      toggleFavorite={toggleFavorite}
+      loadFavorite={searchPokemon}
     />
   );
 }
+
 
 
 

@@ -27,3 +27,7 @@ Step 5
 Step 6 & 7
 1. The builder pattern allows the app to use the Pokemon object to contruct the data step by step. By using this pattern, it is easier to read and edit properties when making new objects.
 2. A model is is better structured than raw API JSON and it should help reduce errors and make the code easier to manage.
+
+Step 8
+1. Now, the controller controls the application logic that includes input validation, calling the API service, and checking for loading errors.
+2. Having controller manage the input validation makes the home screen code more readable and understand what function it is relying off of to still output pokemon data.

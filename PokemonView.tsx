@@ -1,4 +1,5 @@
-import { Button, StyleSheet, Text, TextInput, View, Image } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View, Image, Animated } from "react-native";
+import { useEffect, useRef } from "react";
 import { Pokemon } from "../models/Pokemon";
 
 type Props = {
@@ -30,6 +31,35 @@ export default function PokemonView({
   loadFavorite
 }: Props) {
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const spinAnim = useRef(new Animated.Value(0)).current;
+
+  const spin = spinAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "720deg"]
+  });
+
+  useEffect(() => {
+    if (!pokemon) return;
+
+    fadeAnim.setValue(0);
+    spinAnim.setValue(0);
+
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: true
+      }),
+      Animated.timing(spinAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true
+      })
+    ]).start();
+
+  }, [pokemon]);
+
   return (
     <View style={styles.container}>
 
@@ -52,8 +82,15 @@ export default function PokemonView({
         <Text style={{ color: "red" }}>{error}</Text>
       )}
 
-      {pokemon && (
-        <View style={{ alignItems: "center", marginTop: 20 }}>
+{pokemon && (
+        <Animated.View
+          style={{
+            alignItems: "center",
+            marginTop: 20,
+            opacity: fadeAnim,
+            transform: [{ rotate: spin }]
+          }}
+        >
 
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             {pokemon.name}
@@ -66,8 +103,8 @@ export default function PokemonView({
 
           <Button
             title={isFavorite ? "Unfavorite" : "Favorite"}
-            onPress={toggleFavorite} 
-            />
+            onPress={toggleFavorite}
+          />
 
           <Text style={{ marginTop: 10 }}>Types:</Text>
           {pokemon.types.map((t) => (
@@ -84,7 +121,7 @@ export default function PokemonView({
             <Text key={m}>{m}</Text>
           ))}
 
-        </View>
+        </Animated.View>
       )}
 
       <Text style={{ marginTop: 20, fontWeight: "bold" }}>
@@ -122,4 +159,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
 

@@ -20,6 +20,7 @@ Step 4
 3. Because the app is partially complete at the momemnt, I believe separating the logic into a different function would make it possible to the test the API parsing logic.
 
 Part 2
+
 Step 5
 1. Separating both files without including React makes it easier to use multiple times across the app and reduces the code to look much simpler.
 2. The service function uses the Pokemon name as an input, initiates the API request, and returns the Pokemon data succesfully if found. If it fails or does not exist, an error will be called by the call component.
@@ -33,6 +34,11 @@ Step 8
 2. Having controller manage the input validation makes the home screen code more readable and understand what function it is relying off of to still output pokemon data.
 
 Part 5
+
 Step 9
 1. The view needs props for the current input value, a function to update input, a function to search, and the data states that includes the pokemon object and errors.
 2. Errors would start to happen because it would try calling the controller, UI, and logic all together when it should be separated. They all need to be separated to make the code easier to understand and work together.
+
+Step 10
+1. At this point, controller is managing most components running in the app so there is no reason for the UI to control favorites.
+2. The isFavorite value checks whether the current Pokemon's name is already on the favorite list. I believe derived state in this scenarion pretty much says it checks whether it exist or not.

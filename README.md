@@ -23,3 +23,7 @@ Part 2
 Step 5
 1. Separating both files without including React makes it easier to use multiple times across the app and reduces the code to look much simpler.
 2. The service function uses the Pokemon name as an input, initiates the API request, and returns the Pokemon data succesfully if found. If it fails or does not exist, an error will be called by the call component.
+
+Step 6 & 7
+1. The builder pattern allows the app to use the Pokemon object to contruct the data step by step. By using this pattern, it is easier to read and edit properties when making new objects.
+2. A model is is better structured than raw API JSON and it should help reduce errors and make the code easier to manage.

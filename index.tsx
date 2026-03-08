@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View, Image} from "react-native";
+import { fetchPokemon } from "../services/pokemonApi";
 
 export default function HomeScreen() {
   const [pokemonName, setPokemonName] = useState("");
@@ -22,14 +23,7 @@ export default function HomeScreen() {
     console.log("Search pressed:", q);
 
     try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${q}`);
-
-        if (!response.ok) {
-            throw new Error("Pokemon not found");
-        }
-
-        const data = await response.json();
-        console.log("Pokemon data", data);
+        const data = await fetchPokemon(q);
         setPokemon(data);
 
     } catch (err: any) {
@@ -45,14 +39,14 @@ export default function HomeScreen() {
 
       <TextInput
         style={styles.input}
-        placeholder="Enter Pokemon name (e.g., pikachu)"
+        placeholder="Enter Pokémon name (e.g., pikachu)"
         value={pokemonName}
         onChangeText={setPokemonName}
         autoCapitalize="none"
         autoCorrect={false}
       />
 
-      <Button title="Get Pokemon" onPress={handleSearch} />
+      <Button title="Get Pokémon" onPress={handleSearch} />
 
       {loading && <Text>Loading...Please Wait</Text>}
 
@@ -111,6 +105,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
 
 
 

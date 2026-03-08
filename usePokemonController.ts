@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { fetchPokemon } from "../services/pokemonApi";
 import { Pokemon } from "../models/Pokemon";
+import { useEffect } from "react";
+import { loadFavorites, saveFavorites } from "../services/favoriteStorage";
 
 export function usePokemonController() {
-  const [pokemon, setPokemon] = useState< Pokemon | null>(null);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [favorites, setFavorites] = useState<string[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      const stored = await loadFavorites();
+      setFavorites(stored);
+    }
+    load();
+  }, []);
+
+  useEffect(() => {
+    saveFavorites(favorites);
+  }, [favorites]);  
 
   async function searchPokemon(name: string) {
     const q = name.trim();
@@ -19,8 +33,6 @@ export function usePokemonController() {
     setLoading(true);
     setError("");
     setPokemon(null);
-
-    console.log("Search pressed:", q);
 
     try {
         const data = await fetchPokemon(q);
@@ -56,4 +68,5 @@ export function usePokemonController() {
     toggleFavorite
   };
 }
+
 

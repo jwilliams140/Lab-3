@@ -4,6 +4,8 @@ Part 0
 2. State in index.tsx is const [pokemonName, setPokemonName] = useState("");. This line controls what it will search when the user types in the pokemon they want to search for.
 
 Part 1
+
+Step 1
 1. When fetch receives a non-200 response, it doesn't produce an error. It will return a response object that means there was a unsuccessful attempt to fetch. 2. APIs can return different structures depending on what has happened. Just because it returned something doesn't mean JSON responded in the way it should. This is why it is best to not assume this because the response could mean the program has errors such as runtime errors.
 
 Step 2
@@ -25,9 +27,13 @@ Step 5
 1. Separating both files without including React makes it easier to use multiple times across the app and reduces the code to look much simpler.
 2. The service function uses the Pokemon name as an input, initiates the API request, and returns the Pokemon data succesfully if found. If it fails or does not exist, an error will be called by the call component.
 
+Part 3
+
 Steps 6 & 7
 1. The builder pattern allows the app to use the Pokemon object to contruct the data step by step. By using this pattern, it is easier to read and edit properties when making new objects.
 2. A model is is better structured than raw API JSON and it should help reduce errors and make the code easier to manage.
+
+Part 4
 
 Step 8
 1. Now, the controller controls the application logic that includes input validation, calling the API service, and checking for loading errors.
@@ -39,10 +45,11 @@ Step 9
 1. The view needs props for the current input value, a function to update input, a function to search, and the data states that includes the pokemon object and errors.
 2. Errors would start to happen because it would try calling the controller, UI, and logic all together when it should be separated. They all need to be separated to make the code easier to understand and work together.
 
+Part 6
+
 Step 10
 1. At this point, controller is managing most components running in the app so there is no reason for the UI to control favorites.
-2. The isFavorite value checks whether the current Pokemon's name is already on the favorite list. I believe derived state in this scenarion pretty much says it checks whether it exist or not.
-3. 
+2. The isFavorite value checks whether the current Pokemon's name is already on the favorite list. I believe derived state in this scenarion pretty much says it checks whether it exist or not. 
 
 Step 11
 1. Persistance is implemented as a service because it separates storage logic into AsyncStorage. The controller will run as usual but delegate reading and writing data to AsyncStorage.

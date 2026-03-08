@@ -1,37 +1,10 @@
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View, Image} from "react-native";
-import { fetchPokemon } from "../services/pokemonApi";
+import { usePokemonController } from "../controllers/usePokemonController";
 
 export default function HomeScreen() {
   const [pokemonName, setPokemonName] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [pokemon, setPokemon] = useState<any>(null);
-
-  async function handleSearch() {
-    const q = pokemonName.trim();
-
-    if (!q) {
-        setError("Please enter a Pokémon name");
-        return;
-    }
-
-    setLoading(true);
-    setError("");
-    setPokemon(null);
-
-    console.log("Search pressed:", q);
-
-    try {
-        const data = await fetchPokemon(q);
-        setPokemon(data);
-
-    } catch (err: any) {
-        setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { pokemon, loading, error, searchPokemon } = usePokemonController();
 
   return (
     <View style={styles.container}>
@@ -46,7 +19,8 @@ export default function HomeScreen() {
         autoCorrect={false}
       />
 
-      <Button title="Get Pokémon" onPress={handleSearch} />
+      <Button title="Get Pokémon" onPress= {() => searchPokemon(pokemonName)}
+        />
 
       {loading && <Text>Loading...Please Wait</Text>}
 
@@ -60,23 +34,23 @@ export default function HomeScreen() {
         </Text>
 
         <Image
-        source = {{ uri: pokemon.sprites.front_default }}
-        style = {{ width: 120, height: 120 }}
+          source = {{ uri: pokemon.image}}
+          style = {{ width: 120, height: 120 }}
         />
 
         <Text style = {{ marginTop: 10 }}> Types: </Text>
-        {pokemon.types.map((t: any) => (
-          <Text key = {t.type.name}> {t.type.name} </Text>
+        {pokemon.types.map((t) => (
+          <Text key = {t}> {t} </Text>
         ))}
 
         <Text style = {{ marginTop: 10 }}> Abilities: </Text>
-        {pokemon.abilities.map((a: any) => (
-          <Text key = {a.ability.name}> {a.ability.name} </Text>
+        {pokemon.abilities.map((a) => (
+          <Text key = {a}> {a} </Text>
         ))}
 
         <Text style = {{ marginTop: 10 }}> Moves: </Text>
-        {pokemon.moves.slice(0, 5).map((m: any) => (
-          <Text key = {m.move.name}> {m.move.name} </Text>
+        {pokemon.moves.map((m) => (
+          <Text key = {m}> {m} </Text>
         ))}
       </View>
     )}
@@ -104,7 +78,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
   },
-});
+});;
+
 
 
 

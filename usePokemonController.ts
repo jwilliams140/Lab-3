@@ -6,6 +6,7 @@ export function usePokemonController() {
   const [pokemon, setPokemon] = useState< Pokemon | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   async function searchPokemon(name: string) {
     const q = name.trim();
@@ -32,10 +33,27 @@ export function usePokemonController() {
     }
   }
 
+  function toggleFavorite() {
+    if(!pokemon) return;
+      const name = pokemon.name;
+
+    if(favorites.includes(name)) {
+      setFavorites(favorites.filter(f => f !== name));
+    } else {
+      setFavorites([...favorites, name]);
+    }
+  }
+
+  const isFavorite = pokemon ? favorites.includes(pokemon.name) : false;
+
   return {
     pokemon,
     loading,
     error,
-    searchPokemon
+    favorites,
+    isFavorite,
+    searchPokemon,
+    toggleFavorite
   };
 }
+

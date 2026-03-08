@@ -42,3 +42,8 @@ Step 9
 Step 10
 1. At this point, controller is managing most components running in the app so there is no reason for the UI to control favorites.
 2. The isFavorite value checks whether the current Pokemon's name is already on the favorite list. I believe derived state in this scenarion pretty much says it checks whether it exist or not.
+3. 
+
+Step 11
+1. Persistance is implemented as a service because it separates storage logic into AsyncStorage. The controller will run as usual but delegate reading and writing data to AsyncStorage.
+2. State only retains data when the app is running. Persisted retains data when the app closes.

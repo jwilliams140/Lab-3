@@ -5,9 +5,16 @@ type Props = {
   pokemonName: string;
   setPokemonName: (name: string) => void;
   onSearch: () => void;
+
   pokemon: Pokemon | null;
   loading: boolean;
   error: string;
+
+  favorites: string[];
+  isFavorite: boolean;
+  toggleFavorite: () => void;
+
+  loadFavorite: (name: string) => void;
 };
 
 export default function PokemonView({
@@ -16,7 +23,11 @@ export default function PokemonView({
   onSearch,
   pokemon,
   loading,
-  error
+  error,
+  favorites,
+  isFavorite,
+  toggleFavorite,
+  loadFavorite
 }: Props) {
 
   return (
@@ -53,6 +64,11 @@ export default function PokemonView({
             style={{ width: 120, height: 120 }}
           />
 
+          <Button
+            title={isFavorite ? "Unfavorite" : "Favorite"}
+            onPress={toggleFavorite} 
+            />
+
           <Text style={{ marginTop: 10 }}>Types:</Text>
           {pokemon.types.map((t) => (
             <Text key={t}>{t}</Text>
@@ -70,6 +86,16 @@ export default function PokemonView({
 
         </View>
       )}
+
+      <Text style={{ marginTop: 20, fontWeight: "bold" }}>
+        Favorites
+      </Text>
+
+      {favorites.map((f) => (
+        <Text key={f} onPress={() => loadFavorite(f)}>
+          {f}
+        </Text>
+      ))}
 
     </View>
   );
@@ -96,3 +122,4 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+

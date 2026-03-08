@@ -18,3 +18,8 @@ Step 4
 1. The index.tsx file helps render the User Interface using the return statement, manage values using useState, and handle data processing by using the handleSearch function.
 2. To reuse the same API code presented in index.tsx, you would need to move the same code that manages how the API searches for pokemon data into a different file and make sure that resuable component only focuses on rendering only.
 3. Because the app is partially complete at the momemnt, I believe separating the logic into a different function would make it possible to the test the API parsing logic.
+
+Part 2
+Step 5
+1. Separating both files without including React makes it easier to use multiple times across the app and reduces the code to look much simpler.
+2. The service function uses the Pokemon name as an input, initiates the API request, and returns the Pokemon data succesfully if found. If it fails or does not exist, an error will be called by the call component.
